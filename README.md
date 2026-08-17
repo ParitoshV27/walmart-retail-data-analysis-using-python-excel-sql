@@ -1,0 +1,2 @@
+# walmart-retail-data-analysis-using-python-excel-sql
+An end-to-end Walmart retail data analysis project using Python, SQL, Google BigQuery, Excel, and Power Query. The project explores sales, profitability, discounts, shipping costs, product and regional performance, statistical relationships, and loss-making transactions through EDA, hypothesis testing, SQL analysis, and an interactive dashboard.
