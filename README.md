@@ -33,22 +33,39 @@ Tool	Usage
 
 
 walmart-retail-sales-analysis/
+
 │
+
 ├── README.md
+
 │
+
 ├── data/
+
 │   └── README.md
+
 │
+
 ├── python/
+
 │   └── walmart_retail_analysis.ipynb
+
 │
+
 ├── sql/
-│   └── walmart_retail_analysis.sql
+
+│   └── walmart_retail_analysis.rtf
+
 │
+
 ├── excel/
+
 │   └── walmart_retail_dashboard.xlsx
+
 │
+
 └── dashboard/
+
     └── dashboard_screenshot.png
 
 
