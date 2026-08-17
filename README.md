@@ -89,6 +89,7 @@ The Python component of this project focused on data preparation, exploratory da
 
 
 🗄️ **SQL Analysis**
+
 SQL analysis was performed using Google BigQuery to explore business performance and answer key questions related to sales, profit, products, customers, and regional performance.
 
 Key Areas
