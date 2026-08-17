@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2869
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 SELECT Row ID',\
+`Product Name`, Profit\
+FROM 'trans-parsec-450018-s5.walmart.retail'\
+WHERE\
+Profit < 0\
+ORDER BY Profit;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+SELECT\
+`Product Category`,\
+`Product Sub-Category`,\
+SUM (Profit) AS total_profit,\
+DENSE_RANK() OVER (\
+'Product Category'\
+ORDER BY SUM(Profit) DESC\
+) AS profit_rank\
+FROM \'91trans-parsec-450018-s5 .walmart.retail'\
+GROUP BY 'Product Category,\
+'Product Sub-Category;\
+\
+SELECT\
+State, City,\
+SUM(Profit) as total_profit,\
+DENSE_RANK() OVER (\
+PARTITION BY State\
+ORDER BY SUM (Profit) DESC\
+) AS profit_rank\
+FROM \'91trans-parsec-450018-s5.walmart.retail'\
+GROUP BY State, City;\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 SELECT\
+`Product Category`:\
+SUM (Sales) AS total_sales,\
+ROUND(\
+100 * SUM (Sales) / SUM(SUM (Sales)) OVER (),\
+) AS sales_percentage\
+FROM 'trans-parsec-450018-s5.walmart.retail'\
+GROUP BY 'Product Category\
+ORDER BY total_sales DESC;\
+\
+SELECT State,\
+AVG (Profit) as avg_profit, \
+SUM (Sales) as total_sales,\
+FROM \'91trans-parsec-450018-s5.walmart.retail\'92\
+GROUP BY State\
+HAVING avg_profit < 0\
+ORDER BY avg_profit;\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+WITH\
+state_sales AS(\
+SELECT\
+State,\
+SUM (Sales) AS total_sales,\
+FROM \'91trans-parsec-450018-s5.walmart.retail\'92\
+GROUP BY State\
+SELECT *\
+FROM state_sales\
+WHERE total_sales \'9b (\
+SELECT AVG (total_sales)\
+FROM state_sales\
+)\
+ORDER BY total_sales DESC;\
+\
+SELECT\
+CASE\
+WHEN Sales < 500 THEN 'Low'\
+WHEN Sales < 2000 THEN 'Medium'\
+WHEN Sales < 5000 THEN 'Medium-High'\
+ELSE \'91High'\
+END AS sales_band,\
+COUNT (*) As transactions,\
+SUM (Profit) AS total_profit\
+FROM 'trans-parsec-450018-s5.walmart.retail'\
+GROUP BY sales_band\
+ORDER BY transactions DESC;\
+\
+\
+}
